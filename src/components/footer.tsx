@@ -26,13 +26,20 @@ const socialLinks = [
     href: `tel:${profile.phone.replace(/\s+/g, "")}`,
     icon: "/images/icons/phone.png",
   },
+  {
+    label: `${profile.location} on Google Maps`,
+    href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(profile.location)}`,
+    icon: "/images/icons/maps.png",
+  },
 ];
 
 export function Footer() {
   return (
     // Fixed gold background + fixed dark text -- deliberately the same in
     // both light and dark mode, so the footer doesn't shift with the rest
-    // of the page's theme tokens.
+    // of the page's theme tokens. --footer-bg/-ink/-muted/-border are
+    // defined once in globals.css and aren't overridden in .dark, so they
+    // resolve to the same value regardless of theme.
     <footer className="border-t border-footer-border bg-footer-bg py-12">
       <Container className="flex flex-col items-center gap-8 text-center">
         <Link href="/" className="flex items-center gap-2.5">
@@ -55,7 +62,7 @@ export function Footer() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-footer-muted transition-colors hover:text-[oklch(87.9%_0.169_91.605)]"
+              className="text-sm font-medium text-footer-muted transition-colors hover:text-black"
             >
               {link.label}
             </Link>

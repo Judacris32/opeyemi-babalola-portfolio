@@ -65,10 +65,10 @@
 
   /* Fixed footer palette -- identical in light and dark mode, per design
      direction, rather than tracking the theme tokens above. */
-  --footer-bg: oklch(87.9% 0.169 91.605);
-  --footer-ink: oklch(22% 0.05 84.429);
-  --footer-muted: oklch(32% 0.06 84.429 / 0.82);
-  --footer-border: oklch(22% 0.05 84.429 / 0.18);
+  --footer-bg: var(--bg);
+  --footer-ink: var(--ink);
+  --footer-muted: var(--muted);
+  --footer-border: var(--border);
 
   color-scheme: light;
 }

@@ -41,7 +41,7 @@ export function Contact() {
           <div className="pointer-events-none absolute -bottom-20 -right-10 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
 
           <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white">
-            Open to the right conversation
+            Contact Me
           </span>
 
           <h2 className="mt-6 text-balance font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
@@ -108,11 +108,6 @@ export function Contact() {
               Send the message
             </button>
 
-            <p className="mt-3 text-xs text-white/70" role="status">
-              {sent
-                ? "Opening your email app with this pre-filled — send it from there."
-                : `Opens your email app, addressed to ${profile.email} and ready to send.`}
-            </p>
           </form>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 border-t border-white/15 pt-8 sm:flex-row">

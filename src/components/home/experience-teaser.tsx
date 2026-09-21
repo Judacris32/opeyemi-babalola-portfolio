@@ -14,8 +14,8 @@ export function ExperienceTeaser() {
       <Container>
         <TeaserHeader
           eyebrow="Experience"
-          title="Where he's worked"
-          subtitle="From a Lagos-headquartered bank to fintech startups to the AI registry he founded."
+          title="Where I&rsquo;ve worked and what I&rsquo;ve built"
+          subtitle="From a Lagos-headquartered bank to fintech startups to the AI registry I founded, backend systems that need to hold under real load."
           href="/experience"
           linkLabel="See the full timeline"
         />

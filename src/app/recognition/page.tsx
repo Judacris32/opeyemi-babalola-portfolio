@@ -13,8 +13,8 @@ export default function RecognitionPage() {
     <>
       <PageHeader
         eyebrow="Recognition"
-        title="Industry-judged, not self-declared"
-        subtitle="Two panels, in two different years, landed on the same conclusion independently and the press covered it before this site did."
+        title=" Press and industry recognition for my work"
+        subtitle="Independent recognition for my work in fintech and software engineering, from NiTA 2023 to Titans of Tech Africa 2025."
       />
       <Recognition />
     </>

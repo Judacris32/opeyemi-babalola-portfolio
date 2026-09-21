@@ -16,7 +16,7 @@ export function WorkTeaser() {
         <TeaserHeader
           eyebrow="Selected work"
           title="Products i've built end to end"
-          subtitle="A registry for AI agents. A memory layer that follows a conversation across models. His own, start to finish."
+          subtitle="A registry for AI agents. A memory layer that follows a conversation across models. A banking platform that handles 52 million users. A few of the products I&rsquo;ve built from scratch, and shipped to production."
           href="/work"
           linkLabel="See all the work"
         />
