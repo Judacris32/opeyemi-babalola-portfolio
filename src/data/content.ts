@@ -159,7 +159,7 @@ export const experience: ExperienceItem[] = [
     summary:
       "Worked across backend, blockchain and frontend teams at Binance and Bundle Africa on internal tooling and Cashlink, a high-volume P2P service.",
     highlights: [
-      "Architected Cashlink, a fiat-crypto P2P service processing over $1.5M weekly, in a one-month window",
+      "Architected Cashlink, a fiat-crypto P2P service processing over $1.5M weekly, in a month window",
       "Improved transaction success rate by 15% and customer satisfaction by 25% through critical support fixes",
       "Contributed search and content-processing features (Algolia, Vespa) to a crypto/blockchain social platform, lifting user activity by 30%",
     ],
