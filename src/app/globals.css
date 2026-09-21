@@ -1,0 +1,165 @@
+@import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/fraunces/600-italic.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+/* Bold geometric display font, used just for the hero's headline treatment.
+   Self-hosted directly from /public/fonts (rather than the @fontsource/sora
+   package) so this doesn't depend on that package being installed. */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src:
+    url("/fonts/sora-latin-600-normal.woff2") format("woff2"),
+    url("/fonts/sora-latin-600-normal.woff") format("woff");
+}
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src:
+    url("/fonts/sora-latin-700-normal.woff2") format("woff2"),
+    url("/fonts/sora-latin-700-normal.woff") format("woff");
+}
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+  src:
+    url("/fonts/sora-latin-800-normal.woff2") format("woff2"),
+    url("/fonts/sora-latin-800-normal.woff") format("woff");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode -- primary default */
+  --bg: oklch(95.1% 0.026 236.824);
+  --surface: oklch(99% 0.006 236.824);
+  --surface-2: oklch(91.5% 0.03 236.824);
+  --ink: oklch(23% 0.04 259.815);
+  --muted: oklch(45% 0.03 259.815);
+  --border: oklch(85% 0.03 236.824);
+
+  --brand: oklch(62.3% 0.214 259.815);
+  --brand-contrast: oklch(99% 0.004 236.824);
+
+  --gold: oklch(87.9% 0.169 91.605);
+  --gold-contrast: oklch(22% 0.05 84.429);
+
+  --btn-bg: var(--brand);
+  --btn-ink: var(--brand-contrast);
+
+  --nav-pill-bg: oklch(99% 0.006 236.824 / 0.72);
+  --nav-pill-border: oklch(85% 0.03 236.824 / 0.8);
+
+  /* Fixed footer palette -- identical in light and dark mode, per design
+     direction, rather than tracking the theme tokens above. */
+  --footer-bg: oklch(87.9% 0.169 91.605);
+  --footer-ink: oklch(22% 0.05 84.429);
+  --footer-muted: oklch(32% 0.06 84.429 / 0.82);
+  --footer-border: oklch(22% 0.05 84.429 / 0.18);
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg: oklch(62.3% 0.214 259.815);
+  --surface: oklch(29% 0.085 259.815);
+  --surface-2: oklch(24% 0.07 259.815);
+  --ink: oklch(98% 0.008 236.824);
+  --muted: oklch(87% 0.04 236.824);
+  --border: oklch(46% 0.13 259.815);
+
+  --brand: oklch(82.8% 0.189 84.429);
+  --brand-contrast: oklch(22% 0.05 84.429);
+
+  --gold: oklch(87.9% 0.169 91.605);
+  --gold-contrast: oklch(22% 0.05 84.429);
+
+  --btn-bg: oklch(97% 0.01 236.824);
+  --btn-ink: oklch(20% 0.04 259.815);
+
+  --nav-pill-bg: oklch(29% 0.085 259.815 / 0.72);
+  --nav-pill-border: oklch(52% 0.14 259.815 / 0.6);
+
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes hero-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+body {
+  color: var(--ink);
+  background: var(--bg);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--gold-contrast);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .container-px {
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+
+  .btn-hover-gold {
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  }
+  .btn-hover-gold:hover {
+    background-color: var(--gold) !important;
+    color: var(--gold-contrast) !important;
+    transform: translateY(-1px);
+  }
+
+  .card-surface {
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .marquee-track {
+    animation: hero-marquee 30s linear infinite;
+  }
+  /* Pause on hover, but only on devices that have real hover (mouse/
+     trackpad). Touchscreens simulate `:hover` on tap and never send a
+     "leave" event, so a plain `:hover` rule leaves the marquee stuck
+     paused after the first tap on mobile -- this keeps that to devices
+     where hover behaves like hover. */
+  @media (hover: hover) {
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+  }
+}
