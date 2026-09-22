@@ -52,7 +52,7 @@ export function AboutTeaser() {
           >
             <span className="mb-5 block h-[3px] w-12 rounded-full bg-blue-700" />
             <h3 className="text-balance font-display text-2xl font-bold tracking-tight text-blue-950 sm:text-3xl">
-              An engineer who stays until it works in production
+              Architecting Reliable Systems and Scalable AI Solutions
             </h3>
             <p className="mt-4 leading-relaxed text-neutral-900 sm:text-lg text-justify">
               For six years I&rsquo;ve worked in two worlds that rarely sit with

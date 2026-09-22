@@ -1,15 +1,26 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, Phone, Send } from "lucide-react";
+import { ChevronDown, Send } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { profile } from "@/data/content";
 
+const reasons = [
+  "Project collaboration",
+  "Job opportunity",
+  "Speaking or consulting",
+  "General inquiry",
+  "Other",
+];
+
 export function Contact() {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const [company, setCompany] = React.useState("");
+  const [reason, setReason] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [sent, setSent] = React.useState(false);
 
@@ -20,8 +31,12 @@ export function Contact() {
     // message to the visitor's own email client, pre-filled and ready to
     // send -- nothing is silently lost, and no third-party form service
     // or API key is required to make this work.
-    const subject = `Portfolio inquiry from ${name}`;
-    const body = `${message}\n\n— ${name} (${email})`;
+    const subject = `${reason || "Portfolio inquiry"} — from ${name}`;
+    const body = [
+      message,
+      "",
+      `— ${name}${company ? `, ${company}` : ""} (${email})`,
+    ].join("\n");
     window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setSent(true);
@@ -56,8 +71,8 @@ export function Contact() {
           <form onSubmit={handleSubmit} className="relative mx-auto mt-10 max-w-xl text-left">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="contact-name" className="sr-only">
-                  Your name
+                <label htmlFor="contact-name" className="mb-1.5 block text-xs font-medium text-white/70">
+                  Full name *
                 </label>
                 <input
                   id="contact-name"
@@ -65,13 +80,13 @@ export function Contact() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Your name"
+                  placeholder="Jane Doe"
                   className="w-full rounded-2xl border border-white/25 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 outline-none transition-colors focus:border-gold focus:bg-white/15"
                 />
               </div>
               <div>
-                <label htmlFor="contact-email" className="sr-only">
-                  Your email
+                <label htmlFor="contact-email" className="mb-1.5 block text-xs font-medium text-white/70">
+                  Email address *
                 </label>
                 <input
                   id="contact-email"
@@ -79,15 +94,59 @@ export function Contact() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
+                  placeholder="jane@company.com"
                   className="w-full rounded-2xl border border-white/25 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 outline-none transition-colors focus:border-gold focus:bg-white/15"
                 />
               </div>
             </div>
 
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="contact-company" className="mb-1.5 block text-xs font-medium text-white/70">
+                  Company{" "}
+                  <span className="font-normal text-white/50">(optional)</span>
+                </label>
+                <input
+                  id="contact-company"
+                  type="text"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  placeholder="Where you work"
+                  className="w-full rounded-2xl border border-white/25 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 outline-none transition-colors focus:border-gold focus:bg-white/15"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-reason" className="mb-1.5 block text-xs font-medium text-white/70">
+                  What&rsquo;s this about? *
+                </label>
+                <div className="relative">
+                  <select
+                    id="contact-reason"
+                    required
+                    value={reason}
+                    onChange={(e) => setReason(e.target.value)}
+                    className="w-full appearance-none rounded-2xl border border-white/25 bg-white/10 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-gold focus:bg-white/15 [&>option]:bg-[oklch(34%_0.15_259.815)] [&>option]:text-white"
+                  >
+                    <option value="" disabled>
+                      Select one
+                    </option>
+                    {reasons.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown
+                    className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60"
+                    strokeWidth={2}
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="mt-4">
-              <label htmlFor="contact-message" className="sr-only">
-                What are you building?
+              <label htmlFor="contact-message" className="mb-1.5 block text-xs font-medium text-white/70">
+                Message *
               </label>
               <textarea
                 id="contact-message"
@@ -108,22 +167,22 @@ export function Contact() {
               Send the message
             </button>
 
+            <p className="mt-3 text-xs text-white/70" role="status">
+              {sent
+                ? "Opening your email app with this pre-filled — send it from there."
+                : `Opens your email app, addressed to ${profile.email} and ready to send.`}
+            </p>
           </form>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 border-t border-white/15 pt-8 sm:flex-row">
+          <div className="mt-8 flex items-center justify-center border-t border-white/15 pt-8">
             <a
               href={`mailto:${profile.email}`}
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gold hover:text-gold-contrast hover:border-gold"
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/40 bg-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gold hover:text-gold-contrast hover:border-gold"
             >
-              <Mail className="h-4 w-4" strokeWidth={2.5} />
+              <span className="relative h-4 w-4 shrink-0">
+                <Image src="/images/icons/gmail.png" alt="" fill sizes="16px" className="object-contain" />
+              </span>
               {profile.email}
-            </a>
-            <a
-              href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gold hover:text-gold-contrast hover:border-gold"
-            >
-              <Phone className="h-4 w-4" strokeWidth={2.5} />
-              {profile.phone}
             </a>
           </div>
         </motion.div>

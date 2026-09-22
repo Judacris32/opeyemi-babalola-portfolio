@@ -63,12 +63,14 @@
   --nav-pill-bg: oklch(99% 0.006 236.824 / 0.72);
   --nav-pill-border: oklch(85% 0.03 236.824 / 0.8);
 
-  /* Fixed footer palette -- identical in light and dark mode, per design
-     direction, rather than tracking the theme tokens above. */
-  --footer-bg: var(--bg);
-  --footer-ink: var(--ink);
-  --footer-muted: var(--muted);
-  --footer-border: var(--border);
+  /* Fixed footer palette -- solid black, identical in light and dark
+     mode, per design direction, rather than tracking the theme tokens
+     above. Defined once here and left out of the .dark block below so it
+     never changes with the toggle. */
+  --footer-bg: oklch(0% 0 0);
+  --footer-ink: oklch(100% 0 0);
+  --footer-muted: oklch(100% 0 0 / 0.62);
+  --footer-border: oklch(100% 0 0 / 0.14);
 
   color-scheme: light;
 }

@@ -14,8 +14,8 @@ export function RecognitionTeaser() {
     <Section tone="tint">
       <Container>
         <SectionHeader
-          eyebrow="In the press"
-          title="Press and industry recognition for my work"
+          eyebrow="Features"
+          title="Press and Industry Recognition For My Work"
           subtitle="Independent recognition for my work in fintech and software engineering, from NiTA 2023 to Titans of Tech Africa 2025."
           className="mb-12 sm:mb-14"
         />

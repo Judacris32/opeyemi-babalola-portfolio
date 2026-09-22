@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { navLinks, profile } from "@/data/content";
 
-// Real product icons (Gmail, LinkedIn, Phone, Google Maps) rather than
-// generic outline glyphs -- supplied as brand artwork, so they're rendered
-// as-is via next/image instead of recolored icon components.
+// Real product icons (Gmail, LinkedIn, Phone) stand in for the written-out
+// email/phone -- they already say what they link to, so the text version
+// next to them would just repeat it.
 const socialLinks = [
   {
     label: `Email ${profile.name}`,
@@ -26,29 +26,25 @@ const socialLinks = [
     href: `tel:${profile.phone.replace(/\s+/g, "")}`,
     icon: "/images/icons/phone.png",
   },
-  {
-    label: `${profile.location} on Google Maps`,
-    href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(profile.location)}`,
-    icon: "/images/icons/maps.png",
-  },
 ];
 
 export function Footer() {
   return (
-    // Fixed gold background + fixed dark text -- deliberately the same in
-    // both light and dark mode, so the footer doesn't shift with the rest
-    // of the page's theme tokens. --footer-bg/-ink/-muted/-border are
-    // defined once in globals.css and aren't overridden in .dark, so they
-    // resolve to the same value regardless of theme.
-    <footer className="border-t border-footer-border bg-footer-bg py-12">
-      <Container className="flex flex-col items-center gap-8 text-center">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="relative h-8 w-8 overflow-hidden rounded-full ring-1 ring-footer-border">
+    // --footer-bg/-ink/-muted/-border are a fixed solid-black palette
+    // (globals.css) -- identical in light and dark mode, so the footer
+    // never shifts with the rest of the page's theme.
+    <footer className="border-t border-footer-border bg-footer-bg">
+      <Container className="flex flex-col items-center gap-8 py-16 text-center sm:py-20">
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 transition-opacity hover:opacity-80"
+        >
+          <span className="relative h-9 w-9 overflow-hidden rounded-full ring-1 ring-footer-border">
             <Image
               src="/images/logo-icon.png"
               alt="Opeyemi Babalola logo"
               fill
-              sizes="32px"
+              sizes="36px"
               className="object-contain"
             />
           </span>
@@ -62,14 +58,14 @@ export function Footer() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-footer-muted transition-colors hover:text-black"
+              className="text-sm font-medium text-footer-muted transition-colors hover:text-gold"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="flex items-center gap-4">
           {socialLinks.map((link) => (
             <a
               key={link.label}
@@ -77,10 +73,10 @@ export function Footer() {
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel={link.href.startsWith("http") ? "noreferrer" : undefined}
               aria-label={link.label}
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-pill ring-1 ring-footer-border transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-pill ring-1 ring-footer-border transition-all duration-300 hover:-translate-y-1 hover:shadow-soft hover:ring-gold"
             >
-              <span className="relative h-6 w-6">
-                <Image src={link.icon} alt="" fill sizes="24px" className="object-contain" />
+              <span className="relative h-5 w-5">
+                <Image src={link.icon} alt="" fill sizes="20px" className="object-contain" />
               </span>
             </a>
           ))}
