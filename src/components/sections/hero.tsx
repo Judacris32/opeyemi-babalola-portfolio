@@ -44,7 +44,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.08 }}
-          className="mt-6 max-w-4xl text-balance font-hero text-4xl font-bold leading-[1.1] tracking-tight text-ink [text-shadow:0_4px_28px_var(--bg)] sm:text-3xl md:text-4xl"
+          className="mt-6 max-w-4xl text-balance font-hero text-4xl font-bold leading-[1.1] tracking-tight text-ink [text-shadow:0_4px_28px_var(--bg)] sm:text-3xl md:text-4xl text-justify"
         >
           Hey, I&rsquo;m Opeyemi. I build reliable software and ML systems, ranging from large-scale banking infrastructure to AI agent tooling.
         </motion.h1>
